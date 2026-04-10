@@ -6,779 +6,147 @@
     <title>GGF Store - Sua loja de confiança!</title>
     
     <meta name="description" content="Explore uma loja digital com itens de free fire pela metade do preço.">
-    <meta name="keywords" content="loja ggf store, ggf cheats, ggf team, ggf, GGF TEAM, ggfstore, Passe boyha barato, passe boyha, genival modes, Genival, GGF STORE, gerador de bio para ff, genival mods, genival Garcia, likes para ff grátis">
+    <meta name="keywords" content="loja ggf store, ggf cheats, ggf team, ggf, GGF TEAM, ggfstore, Passe boyha barato">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ggfcheats/Img.trabalhos.escilares/refs/heads/main/20250916_045921.png">
     
+    <!-- Fontes e Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     
-    <style>
-        /* ========================================
-        1. VARIÁVEIS CSS (Fácil Edição) - CORES NEON
-        ========================================
-        */
-        :root {
-            /* Cores do Tema */
-            --cor-fundo-principal: #000000;
-            --cor-destaque-primaria: #FF073A; /* VERMELHO NEON */
-            --cor-texto-principal: #AAAAAA;
-            --cor-texto-secundaria: #F0F0F0;
-            --cor-fundo-card: #1A0000; /* Fundo mais escuro para cards e cabeçalho */
-            --cor-whatsapp: #25d366;
-            
-            /* Sombras e Efeitos */
-            --sombra-card: rgba(255, 7, 58, 0.4); /* Sombra vermelha/neon */
-            
-            /* Tipografia */
-            --fonte-titulo: 'Montserrat', sans-serif;
-            --fonte-corpo: 'Lato', sans-serif;
-        }
-
-        /* RESET e Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--fonte-corpo);
-            color: var(--cor-texto-principal);
-            background-color: var(--cor-fundo-principal);
-            min-height: 10vh;
-            padding-top: 80px; 
-            overflow-x: hidden; 
-        }
-        
-        /* ========================================
-        2. ANIMAÇÕES GERAIS (MANTIDAS)
-        ========================================
-        */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .typing-cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.2em;
-            background-color: var(--cor-destaque-primaria);
-            margin-left: 5px;
-            opacity: 1 !important; 
-            animation: blink-cursor 0.75s step-end infinite;
-        }
-
-        @keyframes blink-cursor {
-            from, to { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-on-scroll {
-            opacity: 0; 
-            transform: translateY(20px); 
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
-        }
-
-        .animate-on-scroll.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* ========================================
-        3. TYPOGRAPHY E TÍTULOS - MELHOR ESPAÇAMENTO
-        ========================================
-        */
-        h2, h3 {
-            font-family: var(--fonte-titulo);
-            color: var(--cor-destaque-primaria);
-            margin-bottom: 20px; /* Mais espaço após o título */
-            padding-top: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-bottom: 3px solid var(--cor-fundo-principal); /* Linha sutil */
-            display: block; /* Garante que a linha ocupe toda a largura */
-        }
-        
-        h3 {
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--cor-destaque-primaria); /* Linha VERMELHA para sub-títulos */
-        }
-        
-        p {
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        /* ========================================
-        4. HEADER FIXO E PESQUISA
-        ========================================
-        */
-        .fixed-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--cor-fundo-card); 
-            border-bottom: 3px solid var(--cor-destaque-primaria); /* Header com linha VERMELHA */
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000; 
-            box-shadow: 0 4px 15px rgba(255, 7, 58, 0.5); /* Sombra mais intensa */
-        }
-
-        .header-logo-container {
-            color: var(--cor-destaque-primaria);
-            font-family: var(--fonte-titulo);
-            font-size: 1.6em;
-            font-weight: 700;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            text-shadow: 0 0 5px rgba(255, 7, 58, 0.8);
-        }
-        
-        .header-logo-container i {
-             margin-right: 10px;
-        }
-
-        .header-icons a, .header-icons button {
-            background: none;
-            border: none;
-            color: var(--cor-texto-secundaria);
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-
-        .header-icons a:hover, .header-icons button:hover {
-            color: var(--cor-destaque-primaria);
-            transform: scale(1.15) rotate(3deg); 
-        }
-
-        /* Barra de Pesquisa */
-        #search-container {
-            position: fixed;
-            top: 75px; /* Ajustado para maior espaçamento */
-            left: 0;
-            width: 100%;
-            background-color: #0d0000;
-            padding: 15px 20px; /* Mais padding */
-            z-index: 999; 
-            display: none; 
-            border-bottom: 3px solid var(--cor-destaque-primaria);
-        }
-        
-        #search-container.open {
-            display: block;
-            animation: fadeInDown 0.3s ease-out;
-        }
-
-        #search-input {
-            width: 100%;
-            padding: 12px; /* Maior padding no input */
-            background: #000;
-            border: 1px solid var(--cor-destaque-primaria);
-            color: white;
-            border-radius: 5px;
-            outline: none;
-            font-size: 1em;
-        }
-        
-        /* ========================================
-        5. SIDEBAR / MENU LATERAL (MANTIDO)
-        ========================================
-        */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: 100%;
-            width: 280px;
-            background-color: var(--cor-fundo-card); 
-            z-index: 1001; 
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.7);
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .sidebar.open {
-            transform: translateX(0);
-        }
-        
-        .sidebar h3 {
-            font-family: var(--fonte-titulo);
-            color: var(--cor-destaque-primaria);
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--cor-texto-principal);
-            padding-bottom: 10px;
-        }
-        
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar li {
-            padding: 12px 0;
-            border-bottom: 1px solid #222;
-            opacity: 0;
-            transform: translateX(20px);
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-        }
-        
-        .sidebar a {
-            color: var(--cor-texto-secundaria);
-            text-decoration: none;
-            font-size: 1.1em;
-            display: block;
-        }
-        
-        .sidebar a:hover {
-            color: var(--cor-destaque-primaria);
-        }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 990; 
-            display: none;
-            transition: opacity 0.4s ease;
-            opacity: 0;
-        }
-
-        .overlay.active {
-            display: block;
-            opacity: 1;
-        }
-        
-        /* ========================================
-        6. CARROSSEL DE IMAGENS (NOVO BANNER) - MANTIDO
-        ========================================
-        */
-        .page-banner {
-            padding: 20px 20px 30px 20px; 
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--cor-fundo-principal);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-radius: 8px; 
-            text-align: center;
-        }
-        
-        .logo-banner {
-            display: none; 
-        }
-
-        .carousel-container {
-            width: 100%;
-            max-width: 900px; 
-            margin: 0 auto 20px auto; 
-            overflow: hidden;
-            position: relative;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(255, 7, 58, 0.7);
-            border: 3px solid var(--cor-destaque-primaria);
-            height: 180px; 
-        }
-        
-        .carousel-track {
-            display: flex;
-            height: 100%;
-            transition: transform 0.6s ease-in-out;
-        }
-        
-        .carousel-slide {
-            min-width: 100%; 
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        
-        .carousel-dots {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-        }
-        
-        .dot {
-            height: 8px;
-            width: 8px;
-            background-color: #ffffff;
-            opacity: 0.5;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .dot.active {
-            opacity: 1;
-            background-color: var(--cor-destaque-primaria);
-            transform: scale(1.2);
-        }
-        
-        .slogan-banner {
-            font-size: 1.2em;
-            margin-top: 15px;
-            color: var(--cor-texto-secundaria);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-
-        /* ========================================
-        7. CONTAINER E SEÇÕES - MELHOR ESPAÇAMENTO
-        ========================================
-        */
-        .container {
-            max-width: 960px;
-            margin: 30px auto 70px auto; /* Aumentada a margem superior e inferior */
-            padding: 40px;
-            background-color: var(--cor-fundo-card);
-            border-radius: 12px;
-            box-shadow: 0 10px 40px var(--sombra-card); /* Sombra mais destacada */
-            opacity: 0; 
-            animation: fadeInUp 1s 0.3s forwards;
-        }
-        
-        .bem-vindo, .produtos, .confianca, .faq-section, .ads-container {
-            margin-bottom: 50px; /* Maior espaçamento entre as seções */
-            padding: 10px 0;
-        }
-        
-        .filter-group {
-            margin-bottom: 25px; /* Mais espaço para o filtro */
-            padding: 10px;
-            background-color: #0d0000;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-        
-        .lista-produtos {
-            display: flex;
-            flex-direction: column; /* Lista verticalmente */
-            gap: 0; 
-            padding: 0; 
-        }
-        
-        .card-produto {
-            background-color: var(--cor-fundo-card); 
-            border-radius: 0; 
-            box-shadow: none; 
-            width: 100%; 
-            padding: 20px 10px; /* Aumentado o padding vertical para "respiro" */
-            text-align: left;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: row; 
-            align-items: center;
-            border-bottom: 1px solid #333; 
-            border-top: none;
-            border-left: none;
-            border-right: none;
-        }
-        
-        .card-produto:last-child {
-            border-bottom: none; 
-        }
-        
-        .card-produto:hover {
-            background-color: #2c0000; /* Leve destaque ao passar o mouse */
-            transform: translateX(5px); /* Efeito sutil de deslize */
-            box-shadow: 0 0 10px rgba(255, 7, 58, 0.1);
-        }
-
-        .card-produto img {
-            width: 90px; 
-            height: 90px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-right: 20px;
-            border: 2px solid var(--cor-destaque-primaria); /* Borda VERMELHA mais grossa */
-            box-shadow: 0 0 8px rgba(255, 7, 58, 0.7);
-            flex-shrink: 0; 
-        }
-        
-        .card-info {
-            flex-grow: 1; 
-        }
-
-        .card-produto h4 {
-            font-family: var(--fonte-titulo);
-            color: var(--cor-destaque-primaria); 
-            margin-bottom: 5px; 
-            font-size: 1.2em; 
-        }
-
-        .card-produto p {
-            color: var(--cor-texto-principal);
-            font-size: 0.95em;
-            margin-bottom: 10px;
-        }
-
-        .product-price {
-            font-family: var(--fonte-titulo);
-            font-size: 1.4em;
-            color: #000; /* Texto preto no fundo neon */
-            background-color: var(--cor-destaque-primaria);
-            padding: 8px 15px;
-            border-radius: 6px;
-            margin-top: 5px;
-            font-weight: 700;
-            box-shadow: 0 0 15px rgba(255, 7, 58, 0.8);
-            display: inline-block; 
-            width: auto;
-        }
-        
-        /* Destaque para promoções */
-        #ads-list-js a img.ad-banner {
-            width: 100%;
-            margin-bottom: 20px;
-            border: 2px solid var(--cor-destaque-primaria);
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-        
-        #ads-list-js a img.ad-banner:hover {
-            transform: scale(1.02);
-        }
-
-        /* ========================================
-        8. CONFABILIDADE E FAQ
-        ========================================
-        */
-        #lista-confianca {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .confianca-item {
-            font-size: 1.1em;
-            padding: 15px 0;
-            border-bottom: 1px dashed #333; 
-            transition: color 0.3s ease;
-        }
-        
-        .confianca-item:last-child {
-            border-bottom: none;
-        }
-        
-        .confianca-item strong {
-            color: var(--cor-destaque-primaria);
-        }
-        
-        .faq-section details {
-            background-color: var(--cor-fundo-principal);
-            border: 1px solid var(--cor-destaque-primaria); /* Borda VERMELHA */
-            border-radius: 6px;
-            margin-bottom: 15px;
-            box-shadow: 0 0 10px rgba(255, 7, 58, 0.3);
-        }
-        
-        .faq-section summary {
-            font-weight: bold;
-            padding: 15px;
-            cursor: pointer;
-            color: var(--cor-texto-secundaria);
-            transition: color 0.2s ease;
-            background-color: #0a0a0a;
-            border-radius: 6px;
-        }
-        
-        .faq-section details[open] summary {
-            color: var(--cor-destaque-primaria);
-            border-bottom: 1px solid var(--cor-destaque-primaria);
-            border-radius: 6px 6px 0 0;
-        }
-        
-        .faq-section details p {
-            padding: 15px;
-            border-top: 1px solid #222;
-            background-color: #0d0000;
-            color: var(--cor-texto-principal);
-            line-height: 1.6;
-            margin-bottom: 0;
-            border-radius: 0 0 6px 6px;
-        }
-        
-        /* BOTÃO VOLTAR AO TOPO (ESTILIZADO) */
-        #back-to-top-button {
-            display: block; 
-            margin: 40px auto 0 auto; 
-            padding: 15px 30px; 
-            font-size: 1.1em;
-            font-weight: bold;
-            text-transform: uppercase;
-            
-            background-color: var(--cor-destaque-primaria);
-            color: var(--cor-fundo-card);
-            border: 2px solid var(--cor-destaque-primaria);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(255, 7, 58, 0.8);
-        }
-
-        #back-to-top-button:hover {
-            background-color: transparent; 
-            color: var(--cor-destaque-primaria);
-            border-color: var(--cor-destaque-primaria);
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(255, 7, 58, 1);
-        }
-        
-        /* WHATSAPP FLUTUANTE */
-        .whatsapp-float {
-             position: fixed;
-             bottom: 30px; 
-             right: 30px;
-             background-color: var(--cor-whatsapp);
-             color: white;
-             padding: 18px;
-             border-radius: 50%;
-             font-size: 2.2em;
-             box-shadow: 0 6px 12px rgba(0,0,0,0.6);
-             z-index: 998;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             text-decoration: none;
-             transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.8);
-        }
-
-        /* RESPONSIVIDADE (MOBILE) */
-        @media (max-width: 768px) {
-            body { padding-top: 70px; }
-            .fixed-header { padding: 10px 15px; }
-            .container { 
-                padding: 15px; 
-                margin: 20px auto 50px auto; 
-            }
-            
-            h3 { font-size: 1.3em; margin-bottom: 25px; }
-            
-            .bem-vindo, .produtos, .confianca, .faq-section, .ads-container {
-                margin-bottom: 40px; 
-            }
-
-            .card-produto img {
-                width: 70px; 
-                height: 70px;
-            }
-
-            .card-produto { padding: 15px 5px; }
-            .product-price { font-size: 1.2em; padding: 6px 12px; }
-            .whatsapp-float { bottom: 20px; right: 15px; padding: 15px; font-size: 2em; }
-        }
-    </style>
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     
+    <!-- Loader Global -->
+    <div id="global-loader" style="display: none;">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Header Fixo -->
     <div class="fixed-header">
         <a href="#" class="header-logo-container">
             <i class="fas fa-gem"></i> GGF Store
         </a>
         <div class="header-icons">
-            <a href="#" title="Pesquisar Produto" id="search-toggle"><i class="fas fa-search"></i></a>
-            <a href="#" title="Seu Carrinho"><i class="fas fa-shopping-cart"></i></a>
-            <button title="Menu Principal" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <a href="#" title="Pesquisar Produto" id="search-toggle">
+                <i class="fas fa-search"></i>
+            </a>
+            <a href="#" title="Seu Carrinho">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            <button title="Menu Principal" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </div>
     
+    <!-- Barra de Pesquisa -->
     <div id="search-container" class="search-bar-container">
-        <input type="text" id="search-input" placeholder="O que você está procurando? Ex: Passe Boyha">
+        <input type="text" id="search-input" placeholder="🔍 O que você está procurando? Ex: Passe Boyha">
     </div>
 
-    <div id="sidebar-overlay" class="overlay"></div> 
-
+    <!-- Overlay e Menu Lateral -->
+    <div id="sidebar-overlay" class="overlay"></div>
     <div id="sidebar-menu" class="sidebar">
-        <h3>Menu Principal <i class="fas fa-times" id="close-sidebar" style="cursor: pointer;"></i></h3>
+        <h3>
+            Menu Principal 
+            <i class="fas fa-times" id="close-sidebar" style="cursor: pointer;"></i>
+        </h3>
         <ul id="sidebar-list">
             <li><a href="#top"><i class="fas fa-home"></i> Início</a></li>
             <li><a href="#ads-section"><i class="fas fa-bullhorn"></i> Promoções</a></li>
             <li><a href="#lista-produtos-js"><i class="fas fa-box-open"></i> Nossos Produtos</a></li>
-            <li><a href="#faq"><i class="fas fa-question-circle"></i> Dúvidas Frequentes (FAQ)</a></li>
-            <li><a href="https://wa.me/" target="_blank" id="sidebar-whatsapp-link" style="color: var(--cor-whatsapp);"><i class="fab fa-whatsapp" style="color: var(--cor-whatsapp);"></i> Fale Conosco</a></li>
-            <li style="margin-top: 20px;"><a href="admin.html" style="color: var(--cor-destaque-primaria);"><i class="fas fa-lock"></i> Área do Admin</a></li>
+            <li><a href="#faq"><i class="fas fa-question-circle"></i> Dúvidas Frequentes</a></li>
+            <li><a href="#" id="sidebar-whatsapp-link" style="color: var(--cor-whatsapp);">
+                <i class="fab fa-whatsapp"></i> Fale Conosco
+            </a></li>
+            <li style="margin-top: 20px;">
+                <a href="admin.html" style="color: var(--cor-destaque-primaria);">
+                    <i class="fas fa-lock"></i> Área do Admin
+                </a>
+            </li>
         </ul>
     </div>
     
+    <!-- Container Principal -->
     <div class="container">
+        <!-- Banner e Carrossel -->
         <header class="page-banner">
             <div class="carousel-container">
-                <div class="carousel-track" id="carousel-track-js">
-                    </div>
+                <div class="carousel-track" id="carousel-track-js"></div>
                 <div class="carousel-dots" id="carousel-dots-js"></div>
             </div>
-            
-            <p class="slogan-banner" id="slogan-texto">Carregando Slogan...</p>
+            <p class="slogan-banner" id="slogan-texto"></p>
         </header>
 
+        <!-- Seção de Boas-vindas -->
         <section class="bem-vindo animate-on-scroll">
             <h2>Olá, jogador!</h2>
-            <p>Seja bem-vindo à GGF Store, o seu destino certo para turbinar sua experiência em jogos. Aqui, a confiança e a segurança são nossas prioridades. Temos uma variedade de produtos para você alcançar o próximo nível.</p>
+            <p>Seja bem-vindo à GGF Store, o seu destino certo para turbinar sua experiência em jogos. 
+               Aqui, a confiança e a segurança são nossas prioridades.</p>
         </section>
         
+        <!-- Seção de Anúncios -->
         <section id="ads-section" class="ads-container">
-             <h3 class="animate-on-scroll">Promoções e Destaques</h3>
-             <div id="ads-list-js">
-                 </div>
+            <h3 class="animate-on-scroll">🔥 Promoções e Destaques</h3>
+            <div class="ads-grid" id="ads-list-js"></div>
         </section>
 
+        <!-- Seção de Produtos -->
         <section class="produtos">
-            <h3 class="animate-on-scroll">Nossos Produtos</h3>
+            <h3 class="animate-on-scroll">🛍️ Nossos Produtos</h3>
             
-            <div class="filter-group animate-on-scroll">
-                <label for="category-filter" style="color: var(--cor-destaque-primaria); font-weight: bold; margin-right: 10px;">Filtrar por:</label>
-                <select id="category-filter">
-                    <option value="all">Todas as Categorias</option>
-                    </select>
-            </div>
+            <!-- Filtros de Categoria -->
+            <div class="category-filters animate-on-scroll" id="category-filters"></div>
             
-            <div class="lista-produtos" id="lista-produtos-js">
-                </div>
+            <!-- Lista de Produtos -->
+            <div class="lista-produtos" id="lista-produtos-js"></div>
         </section>
 
-        <section class="confianca">
-            <h3 class="animate-on-scroll">Por que escolher a GGF Store?</h3>
-            <ul id="lista-confianca">
-                <li class="confianca-item animate-on-scroll"><strong>✅ Segurança</strong>: Transações 100% seguras.</li>
-                <li class="confianca-item animate-on-scroll"><strong>🚀 Rapidez</strong>: Entrega instantânea dos seus produtos.</li>
-                <li class="confianca-item animate-on-scroll"><strong>🌟 Confiabilidade</strong>: Milhares de clientes satisfeitos.</li>
-            </ul>
+        <!-- Contador de Vendas -->
+        <section class="sales-counter-section animate-on-scroll">
+            <h3>🚀 Mais de</h3>
+            <span id="sales-counter">0</span>
+            <h3>Vendas Realizadas</h3>
         </section>
-        
+
+        <!-- Seção FAQ -->
         <section id="faq" class="faq-section">
-            <h2 class="animate-on-scroll">Dúvidas Frequentes (FAQ)</h2>
+            <h2 class="animate-on-scroll">❓ Dúvidas Frequentes</h2>
+            <div class="faq-container" id="faq-container"></div>
             
             <button id="back-to-top-button" class="animate-on-scroll" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
                 ↑ VOLTAR AO TOPO
             </button>
         </section>
 
+        <!-- Footer -->
         <footer>
-            <p style="text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--cor-fundo-principal);">&copy; 2024 GGF Store. Todos os direitos reservados.</p>
+            <p>&copy; 2024 GGF Store. Todos os direitos reservados.</p>
         </footer>
     </div>
     
-    <a href="#" 
-       class="whatsapp-float" 
-       target="_blank"
-       title="Fale Conosco no WhatsApp">
+    <!-- WhatsApp Flutuante -->
+    <a href="#" class="whatsapp-float" target="_blank" title="Fale Conosco no WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- Scripts -->
+    <script type="module" src="js/app.js"></script>
+    
+    <!-- Inicialização do Carrossel (imagens fixas) -->
     <script>
-        // ===========================================
-        // FUNÇÕES GERAIS DE CARREGAMENTO
-        // ===========================================
-
-        async function fetchLojaData() {
-            try {
-                // Adiciona um timestamp para evitar cache
-                const response = await fetch('data.json?t=' + new Date().getTime()); 
-                if (!response.ok) {
-                    throw new Error('Falha ao carregar data.json');
-                }
-                return await response.json();
-            } catch (error) {
-                console.error("Erro no carregamento dos dados da loja, usando dados padrão:", error);
-                // Dados padrão de segurança caso o JSON falhe
-                return { 
-                    products: [
-                        // Adicionando produtos padrão para exibição
-                        { titulo: "Passe Boyha para FF", descricao: "Receba o passe exclusivo...", price: "R$ 69,90", imgSrc: "https://raw.githubusercontent.com/ggfcheats/Img.trabalhos.escilares/refs/heads/main/20250916_045921.png", link: "#", category: "Passe"},
-                        { titulo: "Passe Boyha (Reserva)", descricao: "Obtenha a reserva do seu passe boyha...", price: "R$ 5,00", imgSrc: "https://raw.githubusercontent.com/ggfcheats/Img.trabalhos.escilares/refs/heads/main/20250916_045921.png", link: "#", category: "Reserva"}
-                    ], 
-                    settings: { slogan: 'Sua loja de confiança!', color_primary: '#FF073A', color_secondary: '#F0F0F0', header_background_color: '#1A0000', whatsapp_number: '558496833932' }, 
-                    faq: [
-                        { question: "Como funciona a entrega dos produtos?", answer: "A entrega é imediata após a confirmação do pagamento. Você receberá um código ou acesso diretamente na tela e por e-mail." },
-                        { question: "Quais são as formas de pagamento aceitas?", answer: "Aceitamos Pix, Cartão de Crédito e Boleto Bancário." },
-                        { question: "O produto que comprei é seguro e original?", answer: "Sim, todos os nossos produtos são adquiridos de fontes oficiais e garantimos 100% de segurança." },
-                        { question: "Posso pedir reembolso se houver algum problema?", answer: "Sim, oferecemos reembolso total caso o produto não seja entregue ou apresente defeito, conforme nossa política de devolução." }
-                    ],
-                    ads: [
-                        // Adicionando ads padrão para exibição
-                        { title: "Super Oferta de Verão", imageUrl: "https://via.placeholder.com/900x150?text=Super+Oferta+de+Verão", targetLink: "#" }
-                    ]
-                };
-            }
-        }
-        
-        // ===========================================
-        // LÓGICA DE ANIMAÇÃO MÁQUINA DE ESCREVER
-        // ===========================================
-        function typingEffect(elementId, text) {
-            const element = document.getElementById(elementId);
-            if (!element) return;
-            
-            let i = 0;
-            const speed = 70; 
-            
-            element.style.animation = 'none'; 
-            element.textContent = '';
-            element.style.opacity = 1; 
-
-            const cursor = document.createElement('span');
-            cursor.className = 'typing-cursor';
-            element.appendChild(cursor);
-
-            function typeWriter() {
-                if (i < text.length) {
-                    element.insertBefore(document.createTextNode(text.charAt(i)), cursor);
-                    i++;
-                    setTimeout(typeWriter, speed);
-                } else {
-                    cursor.remove();
-                }
-            }
-            typeWriter();
-        }
-        
-        // 🚨 DADOS PADRÃO PARA O CARROSSEL (TROQUE AS URLS PELAS SUAS!) 🚨
+        // Carrossel com imagens locais (não depende do Firebase)
         const carouselImages = [
-            { url: 'https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/20251012_105852.jpg', alt: 'Slide 1: Passe Boyha em Promoção' }, 
-            { url: 'https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/IMG_20251009_193134.jpg', alt: 'Slide 2: Evento Semanal de Skins' }, 
-            { url: 'https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/IMG_20251012_102920.jpg', alt: 'Slide 3: Recarga de Diamantes Barata' }, 
-            { url: 'https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/20251012_104647.jpg', alt: 'Slide 4: Novidades da Temporada' } 
+            { url: 'https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/20251012_105852.jpg', alt: 'Slide 1' }, 
+            { url: 'https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/IMG_20251009_193134.jpg', alt: 'Slide 2' }, 
+            { url: 'https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/IMG_20251012_102920.jpg', alt: 'Slide 3' }
         ];
         
         let slideIndex = 0;
         let autoPlayInterval;
-
-        // ===========================================
-        // LÓGICA DO CARROSSEL
-        // ===========================================
+        
         function renderCarousel() {
             const track = document.getElementById('carousel-track-js');
             const dotsContainer = document.getElementById('carousel-dots-js');
@@ -792,7 +160,6 @@
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
                 slide.style.backgroundImage = `url('${img.url}')`;
-                slide.setAttribute('aria-label', img.alt);
                 track.appendChild(slide);
 
                 const dot = document.createElement('span');
@@ -802,7 +169,7 @@
             });
 
             setSlide(0);
-            startCarouselAutoPlay();
+            startAutoPlay();
         }
         
         function setSlide(index) {
@@ -824,267 +191,12 @@
             setSlide(slideIndex);
         }
 
-        function startCarouselAutoPlay() {
+        function startAutoPlay() {
             if (autoPlayInterval) clearInterval(autoPlayInterval);
-            autoPlayInterval = setInterval(nextSlide, 5000); 
+            autoPlayInterval = setInterval(nextSlide, 5000);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const produtosDiv = document.getElementById('lista-produtos-js');
-            const adsDiv = document.getElementById('ads-list-js');
-            const searchContainer = document.getElementById('search-container');
-            const searchInput = document.getElementById('search-input');
-            const searchButton = document.getElementById('search-toggle'); 
-            const menuButton = document.getElementById('menu-toggle'); 
-            const sidebar = document.getElementById('sidebar-menu');
-            const closeSidebar = document.getElementById('close-sidebar');
-            const sidebarOverlay = document.getElementById('sidebar-overlay'); 
-            const sidebarListItems = document.querySelectorAll('#sidebar-list li'); 
-            const faqSection = document.getElementById('faq'); 
-            const filterSelect = document.getElementById('category-filter');
-            const whatsappFloat = document.querySelector('.whatsapp-float');
-            const sidebarWhatsappLink = document.getElementById('sidebar-whatsapp-link');
-            
-            let lojaData = {};
-            
-            // ===========================================
-            // LÓGICA DE ANIMAÇÃO NO SCROLL
-            // ===========================================
-            
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target); 
-                    }
-                });
-            }, { 
-                threshold: 0.1, 
-                rootMargin: '0px 0px -100px 0px' 
-            });
-            
-            const itemsToObserve = document.querySelectorAll('.animate-on-scroll:not(#lista-produtos-js):not(#faq)');
-            itemsToObserve.forEach((item) => {
-                observer.observe(item);
-            });
-
-            // ===========================================
-            // RENDERIZAÇÃO DE PRODUTOS, FAQ, ADS
-            // ===========================================
-            
-            function renderizarProdutos(listaProdutos) {
-                produtosDiv.querySelectorAll('.card-produto').forEach(card => observer.unobserve(card));
-                produtosDiv.innerHTML = ''; 
-                
-                if (listaProdutos.length === 0) {
-                     produtosDiv.innerHTML = `<p style="width: 100%; text-align: center; color: var(--cor-destaque-primaria); padding: 30px;">Nenhum produto encontrado com este termo ou categoria.</p>`;
-                } else {
-                    listaProdutos.forEach((produto, index) => {
-                        const card = document.createElement('a');
-                        card.href = produto.link;
-                        card.className = 'card-produto animate-on-scroll'; 
-                        card.style.transitionDelay = `${index * 0.1}s`; 
-                        
-                        // 🚨 ESTRUTURA ATUALIZADA DO CARD 🚨
-                        card.innerHTML = `
-                            <img src="${produto.imgSrc}" alt="${produto.titulo}">
-                            <div class="card-info"> 
-                                <h4>${produto.titulo}</h4> 
-                                <p>${produto.descricao}</p>
-                                <span class="product-price">${produto.price || 'Preço Indisponível'}</span>
-                            </div>
-                        `;
-                        // ------------------------------------
-                        
-                        produtosDiv.appendChild(card);
-                        observer.observe(card); 
-                    });
-                }
-            }
-            
-            function renderizarFAQ(listaFAQ) {
-                const backToTop = faqSection.querySelector('#back-to-top-button');
-                
-                // Remove apenas os detalhes/faq items gerados dinamicamente
-                Array.from(faqSection.children).forEach(child => {
-                    if (child.tagName.toLowerCase() === 'details') { 
-                        child.remove();
-                    }
-                });
-
-                listaFAQ.forEach((item, index) => {
-                    const details = document.createElement('details');
-                    details.className = 'faq-item animate-on-scroll';
-                    details.style.transitionDelay = `${index * 0.1}s`;
-                    
-                    details.innerHTML = `
-                        <summary>${item.question}</summary>
-                        <p>${item.answer}</p>
-                    `;
-                    
-                    if (backToTop) {
-                         faqSection.insertBefore(details, backToTop);
-                    } else {
-                         faqSection.appendChild(details);
-                    }
-                    observer.observe(details);
-                });
-            }
-            
-            function renderizarAds(listaAds) {
-                adsDiv.innerHTML = '';
-                
-                if (listaAds.length === 0) {
-                    adsDiv.parentElement.style.display = 'none';
-                } else {
-                    adsDiv.parentElement.style.display = 'block';
-                    listaAds.forEach((ad, index) => {
-                        const link = document.createElement('a');
-                        link.href = ad.targetLink;
-                        link.target = '_blank';
-                        link.className = 'animate-on-scroll';
-                        link.style.transitionDelay = `${index * 0.2}s`;
-                        
-                        const img = document.createElement('img');
-                        img.src = ad.imageUrl;
-                        img.alt = ad.title;
-                        img.className = 'ad-banner';
-                        
-                        link.appendChild(img);
-                        adsDiv.appendChild(link);
-                        observer.observe(link);
-                    });
-                }
-            }
-
-            // ===========================================
-            // FUNÇÃO PRINCIPAL QUE CARREGA TUDO
-            // ===========================================
-            async function carregarTudo() {
-                lojaData = await fetchLojaData();
-                const settings = lojaData.settings || {};
-                
-                // 1. Aplicar Estilos e Textos Globais
-                document.documentElement.style.setProperty('--cor-destaque-primaria', settings.color_primary || '#FF073A');
-                document.documentElement.style.setProperty('--cor-texto-secundaria', settings.color_secondary || '#F0F0F0');
-                document.documentElement.style.setProperty('--cor-fundo-card', settings.header_background_color || '#1A0000');
-
-                const banner = document.querySelector('.page-banner');
-                if (settings.banner_image_url) {
-                    banner.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${settings.banner_image_url}')`;
-                } else {
-                    banner.style.backgroundImage = 'none';
-                    banner.style.backgroundColor = 'var(--cor-fundo-card)'; 
-                }
-
-                const sloganText = settings.slogan || 'Sua loja de confiança!';
-                typingEffect('slogan-texto', sloganText);
-                
-                // 2. Configurar Links do WhatsApp
-                const whatsappNumber = settings.whatsapp_number || '558496833932'; 
-                const whatsappLinkBase = `https://wa.me/${whatsappNumber}?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20sobre%20os%20produtos%20da%20GGF%20Store.`;
-
-                whatsappFloat.href = whatsappLinkBase;
-                if (sidebarWhatsappLink) {
-                    sidebarWhatsappLink.href = `https://wa.me/${whatsappNumber}`;
-                }
-                
-                // 3. Renderizar Conteúdo
-                renderCarousel(); 
-                renderizarAds(lojaData.ads || []);
-                renderizarProdutos(lojaData.products || []);
-                renderizarFAQ(lojaData.faq || []);
-                
-                // 4. Preencher Filtro de Categoria
-                const categories = [...new Set((lojaData.products || []).map(p => p.category).filter(c => c))];
-                filterSelect.innerHTML = '<option value="all">Todas as Categorias</option>';
-                categories.forEach(category => {
-                    const option = document.createElement('option');
-                    option.value = category;
-                    option.textContent = category;
-                    filterSelect.appendChild(option);
-                });
-            }
-            
-            // ===========================================
-            // LÓGICA DE PESQUISA/FILTRO
-            // ===========================================
-
-            function applyFiltersAndSearch() {
-                const termoBusca = searchInput.value.toLowerCase();
-                const selectedCategory = filterSelect.value;
-                let produtosFiltrados = lojaData.products || [];
-
-                if (selectedCategory !== 'all') {
-                    produtosFiltrados = produtosFiltrados.filter(p => p.category === selectedCategory);
-                }
-                
-                if (termoBusca) {
-                     produtosFiltrados = produtosFiltrados.filter(produto => {
-                        return produto.titulo.toLowerCase().includes(termoBusca) || 
-                               produto.descricao.toLowerCase().includes(termoBusca);
-                     });
-                }
-                
-                renderizarProdutos(produtosFiltrados);
-            }
-
-            searchInput.addEventListener('keyup', applyFiltersAndSearch);
-            filterSelect.addEventListener('change', applyFiltersAndSearch);
-            
-            searchButton.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                searchContainer.classList.toggle('open');
-                
-                if (searchContainer.classList.contains('open')) {
-                    searchInput.focus();
-                } else {
-                    searchInput.value = '';
-                    applyFiltersAndSearch(); 
-                }
-            });
-            
-            // ===========================================
-            // LÓGICA DO MENU LATERAL (SIDEBAR)
-            // ===========================================
-            
-            const closeMenu = () => {
-                sidebar.classList.remove('open');
-                setTimeout(() => {
-                    sidebarOverlay.classList.remove('active');
-                    sidebarListItems.forEach(li => li.style.transitionDelay = '0s');
-                }, 100); 
-            };
-            
-            const openMenu = () => {
-                 sidebar.classList.add('open');
-                 sidebarOverlay.classList.add('active');
-                 
-                 // CORREÇÃO: Fecha a barra de pesquisa ao abrir o menu
-                 searchContainer.classList.remove('open');
-                 searchInput.value = ''; 
-                 applyFiltersAndSearch();
-                 
-                 sidebarListItems.forEach((li, index) => {
-                    li.style.transitionDelay = `${0.1 + index * 0.1}s`;
-                 });
-            };
-
-            menuButton.addEventListener('click', (e) => {
-                 e.preventDefault(); 
-                 openMenu();
-            });
-            
-            closeSidebar.addEventListener('click', closeMenu);
-            sidebarOverlay.addEventListener('click', closeMenu);
-            
-            sidebar.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-
-            // Inicia o site
-            carregarTudo();
-        });
+        document.addEventListener('DOMContentLoaded', renderCarousel);
     </script>
 </body>
 </html>
