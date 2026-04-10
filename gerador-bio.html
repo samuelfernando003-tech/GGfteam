@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Bio Multi-Cores - GGF Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --azul-escuro: #0a192f;
+            --azul-claro: #64ffda;
+            --cinza-principal: #8892b0;
+            --cinza-claro: #ccd6f6;
+            --fundo-card: #112240;
+            --sombra-card: rgba(0, 0, 0, 0.3);
+            --fundo-input: #172a45;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--cinza-principal);
+            background-color: var(--azul-escuro);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: var(--fundo-card);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--sombra-card);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--fundo-card);
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--azul-claro);
+            font-size: 3.5em;
+            font-weight: 700;
+            text-shadow: 0 0 5px var(--azul-claro);
+        }
+
+        .slogan {
+            font-size: 1.1em;
+            margin-top: 10px;
+            color: var(--cinza-claro);
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--cinza-claro);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* --- Estilos do Gerador --- */
+        .formulario-bio {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--azul-escuro);
+            border-radius: 8px;
+        }
+        
+        .segmentos-wrapper {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .segmento {
+            flex: 1;
+            background-color: #112240;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--fundo-input);
+        }
+
+        .segmento h4 {
+            color: var(--azul-claro);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: center; /* Centraliza o seletor de cor */
+        }
+
+        label {
+            color: var(--cinza-claro);
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: block;
+            font-size: 0.9em;
+        }
+
+        /* ESTILO DO SELETOR DE COR MAIS VISÍVEL */
+        input[type="color"] {
+            width: 60px;
+            height: 60px;
+            padding: 0;
+            border: 3px solid var(--cinza-claro);
+            cursor: pointer;
+            border-radius: 10px;
+            display: block;
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+            transition: box-shadow 0.3s;
+            margin: 0 auto;
+        }
+        
+        input[type="color"]:hover {
+            box-shadow: 0 0 15px var(--azul-claro);
+        }
+        
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 7px;
+        }
+        /* FIM DO ESTILO SELETOR DE COR */
+
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid var(--fundo-card);
+            background-color: var(--fundo-input);
+            color: var(--cinza-claro);
+            font-size: 0.9em;
+            resize: none;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+            height: 60px;
+            text-align: left;
+        }
+
+        .resultado-container {
+            margin-top: 20px;
+            text-align: center;
+            border-top: 1px dashed var(--fundo-input);
+            padding-top: 20px;
+        }
+
+        /* NOVO ESTILO PARA PRÉ-VISUALIZAÇÃO */
+        .preview-box {
+            background-color: #000000; /* Simula o fundo preto do perfil do FF */
+            color: #FFFFFF;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.2em;
+            min-height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #previewFinal span {
+            font-weight: bold;
+        }
+        
+        #resultadoBio {
+            font-family: 'Consolas', monospace;
+            font-size: 1.1em;
+            font-weight: 700;
+            border: 2px dashed var(--azul-claro);
+            padding: 15px;
+            background-color: var(--fundo-input);
+            overflow-wrap: break-word;
+            text-align: left;
+        }
+        
+        /* --- Estilos para as Recomendações (Mantidos) --- */
+        .recomendacoes {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .recomendacoes h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--azul-claro);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--fundo-input);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .lista-bios {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .card-bio {
+            background-color: var(--fundo-input);
+            padding: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            border-left: 5px solid var(--cinza-principal);
+        }
+
+        .card-bio:hover {
+            background-color: #253959;
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
+        }
+        
+        .card-bio h4 {
+            color: var(--cinza-claro);
+            margin-bottom: 5px;
+        }
+
+        .card-bio .preview-bio {
+            font-weight: 700;
+        }
+
+
+        .cat-tiktok { border-left-color: #ff0050; }
+        .cat-provocante { border-left-color: #ffc300; }
+        .cat-kawaii { border-left-color: #f7a2d4; }
+        .cat-rank { border-left-color: #A020F0; } 
+        
+        .botao-copiar {
+            background-color: var(--azul-claro);
+            color: var(--azul-escuro);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            margin-top: 15px;
+        }
+
+        .botao-copiar:hover {
+            background-color: #53cdb3;
+            transform: translateY(-2px);
+        }
+
+        .mensagem-copia {
+            margin-top: 10px;
+            color: var(--azul-claro);
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .dica {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--fundo-input);
+            border-left: 5px solid var(--azul-claro);
+            font-size: 0.9em;
+            color: var(--cinza-principal);
+        }
+
+        .dica strong {
+            color: var(--cinza-claro);
+        }
+
+        /* ESTILO DO BOTÃO DE VOLTAR PERSONALIZADO */
+        .voltar-loja-btn {
+            display: block; /* Ocupa a largura total */
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto 0;
+            background-color: transparent;
+            color: var(--azul-claro);
+            border: 2px solid var(--azul-claro);
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .voltar-loja-btn:hover {
+            background-color: var(--azul-claro);
+            color: var(--azul-escuro);
+            box-shadow: 0 0 15px var(--azul-claro);
+        }
+        /* FIM DO ESTILO BOTÃO VOLTAR */
+
+        footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--fundo-card);
+            margin-top: 40px;
+            color: var(--cinza-principal);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .logo {
+                font-size: 2.5em;
+            }
+            .segmentos-wrapper {
+                flex-direction: column;
+            }
+            .lista-bios {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">GGF Store</h1>
+            <p class="slogan">Gerador de Bio **Multi-Cores** para Free Fire</p>
+        </header>
+
+        <section class="gerador">
+            <h2>Crie Sua Bio de 3 Cores!</h2>
+            
+            <div class="formulario-bio">
+                <p style="text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--azul-claro);">
+                    A Bio final será a junção dos 3 segmentos: **SEG 1** + **SEG 2** + **SEG 3**
+                </p>
+                <div class="segmentos-wrapper">
+                    <div class="segmento">
+                        <h4>1ª Cor e Texto</h4>
+                        <div class="input-group">
+                            <label for="seletorCor1" style="text-align: center;">Cor 1:</label>
+                            <input type="color" id="seletorCor1" value="#FF0000">
+                        </div>
+                        <div class="input-group">
+                            <label for="textoBio1">Texto 1 (Máx 20 caracteres):</label>
+                            <textarea id="textoBio1" maxlength="20" rows="1" placeholder="Ex: PRO"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="segmento">
+                        <h4>2ª Cor e Texto</h4>
+                        <div class="input-group">
+                            <label for="seletorCor2" style="text-align: center;">Cor 2:</label>
+                            <input type="color" id="seletorCor2" value="#FFFF00">
+                        </div>
+                        <div class="input-group">
+                            <label for="textoBio2">Texto 2 (Máx 20 caracteres):</label>
+                            <textarea id="textoBio2" maxlength="20" rows="1" placeholder="Ex: PLAYER"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="segmento">
+                        <h4>3ª Cor e Texto</h4>
+                        <div class="input-group">
+                            <label for="seletorCor3" style="text-align: center;">Cor 3:</label>
+                            <input type="color" id="seletorCor3" value="#00FF00">
+                        </div>
+                        <div class="input-group">
+                            <label for="textoBio3">Texto 3 (Máx 20 caracteres):</label>
+                            <textarea id="textoBio3" maxlength="20" rows="1" placeholder="Ex: GGF"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resultado-container">
+                    <label>Pré-visualização (Simulação de Perfil):</label>
+                    <div class="preview-box" id="previewFinal">
+                        </div>
+
+                    <label>Código Final para o Jogo (Copie e Cole!):</label>
+                    <div id="resultadoBio">[FF0000]PRO[FFFF00]PLAYER[00FF00]GGF</div>
+                    
+                    <button class="botao-copiar" id="botaoCopiar">COPIAR CÓDIGO</button>
+                    <p class="mensagem-copia" id="mensagemCopia">Copiado!</p>
+                </div>
+            </div>
+            
+            <div class="recomendacoes">
+                <h3>Modelos Multi-Cores (Clique para Usar)</h3>
+                <div class="lista-bios" id="lista-bios-recomendadas">
+                    </div>
+            </div>
+
+
+            <div class="dica">
+                <strong>Dica Importante:</strong> A soma do texto dos 3 segmentos **não pode ultrapassar 50 caracteres** no total. O jogo ignora os códigos de cor no cálculo do limite.
+            </div>
+
+            <a href="index.html" class="voltar-loja-btn">← VOLTAR PARA A LOJA</a>
+
+        </section>
+
+        <footer>
+            <p>&copy; 2024 GGF Store. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const seletorCor1 = document.getElementById('seletorCor1');
+            const textoBio1 = document.getElementById('textoBio1');
+            const seletorCor2 = document.getElementById('seletorCor2');
+            const textoBio2 = document.getElementById('textoBio2');
+            const seletorCor3 = document.getElementById('seletorCor3');
+            const textoBio3 = document.getElementById('textoBio3');
+            
+            const resultadoBio = document.getElementById('resultadoBio');
+            const previewFinal = document.getElementById('previewFinal'); // Novo elemento de preview
+            const botaoCopiar = document.getElementById('botaoCopiar');
+            const mensagemCopia = document.getElementById('mensagemCopia');
+            const listaRecomendadas = document.getElementById('lista-bios-recomendadas');
+
+            // Estrutura do modelo: [cor1, texto1, cor2, texto2, cor3, texto3, categoria, classe]
+            const biosRecomendadas = [
+                { cores: ["#FFD700", "DEUS", "#FFFFFF", "TEM", "#A020F0", "MEU TEMPO"], categoria: "Deus/Fé", classe: "cat-rank" },
+                { cores: ["#FF0050", "TIK", "#00F0FF", "TOK", "#FFD700", "GIRL"], categoria: "TikTok", classe: "cat-tiktok" },
+                { cores: ["#0000FF", "ME", "#FF0000", "CHAMA", "#FFFFFF", "DE CRUSH"], categoria: "Provocante", classe: "cat-provocante" },
+                { cores: ["#FF69B4", "KAWAII", "#FFFFFF", "QUE DÁ", "#87CEEB", "BOYAH"], categoria: "Kawaii/Fofo", classe: "cat-kawaii" },
+                { cores: ["#A020F0", "MESTRE", "#FFFFFF", "DO", "#FF4500", "GELO"], categoria: "Rank/Mestre", classe: "cat-rank" },
+                { cores: ["#FF4500", "SÓ", "#FFFFFF", "CAPA", "#FFD700", "AMARELA"], categoria: "Headshot", classe: "cat-rank" }
+            ];
+
+            function atualizarBio() {
+                const cor1 = seletorCor1.value.toUpperCase().replace('#', '');
+                const texto1 = textoBio1.value;
+                const cor2 = seletorCor2.value.toUpperCase().replace('#', '');
+                const texto2 = textoBio2.value;
+                const cor3 = seletorCor3.value.toUpperCase().replace('#', '');
+                const texto3 = textoBio3.value;
+                
+                // Concatena as três partes para o CÓDIGO FINAL
+                const codigoFinal = `[${cor1}]${texto1}[${cor2}]${texto2}[${cor3}]${texto3}`;
+                resultadoBio.textContent = codigoFinal;
+
+                // Concatena as três partes para a PRÉ-VISUALIZAÇÃO (com tags HTML)
+                previewFinal.innerHTML = `
+                    <span style="color: #${cor1};">${texto1}</span>
+                    <span style="color: #${cor2};">${texto2}</span>
+                    <span style="color: #${cor3};">${texto3}</span>
+                `;
+            }
+            
+            function carregarBiosRecomendadas() {
+                biosRecomendadas.forEach(bio => {
+                    const [cor1, texto1, cor2, texto2, cor3, texto3] = bio.cores;
+                    const textoCompleto = `${texto1} ${texto2} ${texto3}`;
+                    
+                    const card = document.createElement('div');
+                    card.className = `card-bio ${bio.classe}`;
+                    card.setAttribute('data-cor1', cor1);
+                    card.setAttribute('data-texto1', texto1);
+                    card.setAttribute('data-cor2', cor2);
+                    card.setAttribute('data-texto2', texto2);
+                    card.setAttribute('data-cor3', cor3);
+                    card.setAttribute('data-texto3', texto3);
+                    
+                    // HTML para mostrar a pré-visualização (aproximada) no Card
+                    card.innerHTML = `
+                        <h4>[${bio.categoria}]</h4>
+                        <p class="preview-bio">
+                            <span style="color: ${cor1};">${texto1}</span>
+                            <span style="color: ${cor2};">${texto2}</span>
+                            <span style="color: ${cor3};">${texto3}</span>
+                        </p>
+                        <p style="font-size: 0.8em; color: var(--cinza-principal);">Toque para usar. Bio final: ${textoCompleto}</p>
+                    `;
+                    
+                    // Adiciona o evento de clique para carregar a Bio
+                    card.addEventListener('click', function() {
+                        // 1. Atualiza os seletores de cor e textos
+                        seletorCor1.value = `#${this.getAttribute('data-cor1')}`;
+                        textoBio1.value = this.getAttribute('data-texto1');
+                        seletorCor2.value = `#${this.getAttribute('data-cor2')}`;
+                        textoBio2.value = this.getAttribute('data-texto2');
+                        seletorCor3.value = `#${this.getAttribute('data-cor3')}`;
+                        textoBio3.value = this.getAttribute('data-texto3');
+                        
+                        // 2. Chama a função de atualização para gerar o código e o preview
+                        atualizarBio();
+                    });
+                    
+                    listaRecomendadas.appendChild(card);
+                });
+            }
+
+            // Event Listeners para atualização manual
+            // 'input' garante que a atualização seja instantânea enquanto o usuário digita/muda a cor
+            seletorCor1.addEventListener('input', atualizarBio);
+            textoBio1.addEventListener('input', atualizarBio);
+            seletorCor2.addEventListener('input', atualizarBio);
+            textoBio2.addEventListener('input', atualizarBio);
+            seletorCor3.addEventListener('input', atualizarBio);
+            textoBio3.addEventListener('input', atualizarBio);
+
+
+            botaoCopiar.addEventListener('click', () => {
+                const textoParaCopiar = resultadoBio.textContent;
+                
+                // Copia o texto para a área de transferência
+                navigator.clipboard.writeText(textoParaCopiar)
+                    .then(() => {
+                        mensagemCopia.style.opacity = 1;
+                        setTimeout(() => {
+                            mensagemCopia.style.opacity = 0;
+                        }, 2000);
+                        
+                        botaoCopiar.textContent = "CÓDIGO COPIADO!";
+                        
+                        setTimeout(() => {
+                            botaoCopiar.textContent = "COPIAR CÓDIGO";
+                        }, 1000);
+                    })
+                    .catch(err => {
+                        alert('Erro ao copiar o código. Por favor, copie manualmente: ' + textoParaCopiar);
+                    });
+            });
+
+            // Inicializa a página
+            carregarBiosRecomendadas();
+            atualizarBio(); // Chama a função na inicialização para carregar o preview padrão
+        });
+    </script>
+</body>
+</html>

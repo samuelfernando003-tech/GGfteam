@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missões - GGF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-escuro: #0a192f;
+            --azul-claro: #64ffda;
+            --cinza-principal: #8892b0;
+            --cinza-claro: #ccd6f6;
+            --fundo-card: #112240;
+            --sombra-card: rgba(0, 0, 0, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; color: var(--cinza-principal); background-color: var(--azul-escuro); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; overflow-y: auto; }
+        .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-image: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px); background-size: 50px 50px; animation: move-bg 100s linear infinite; }
+        @keyframes move-bg { from { background-position: 0 0; } to { background-position: 100% 100%; } }
+        .container { max-width: 450px; width: 90%; margin: auto; padding: 40px 20px; background-color: var(--fundo-card); border-radius: 12px; box-shadow: 0 10px 30px var(--sombra-card); opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; position: relative; z-index: 1; text-align: center; }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        header { padding-bottom: 20px; border-bottom: 1px solid var(--cinza-principal); margin-bottom: 20px; }
+        .logo { font-family: 'Montserrat', sans-serif; color: var(--azul-claro); font-size: 2.5em; font-weight: 700; text-shadow: 0 0 5px var(--azul-claro); animation: pulse-logo 2s infinite alternate; }
+        @keyframes pulse-logo { from { text-shadow: 0 0 5px var(--azul-claro); } to { text-shadow: 0 0 15px var(--azul-claro), 0 0 25px var(--azul-claro); } }
+        .slogan { font-size: 1.1em; margin-top: 10px; color: var(--cinza-claro); }
+        .message { margin-top: 20px; font-weight: bold; color: var(--cinza-claro); min-height: 24px; }
+        .botao-missao { width: 100%; padding: 12px; background-color: var(--azul-claro); color: var(--azul-escuro); font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: transform 0.3s ease, background-color 0.3s ease; margin-top: 10px; border-radius: 5px; display: inline-block; }
+        .botao-missao:hover { transform: translateY(-3px); background-color: #55f3bf; }
+        .missao-item { display: none; padding-top: 20px; border-top: 1px solid var(--fundo-card); margin-top: 20px; }
+        .missao-item h2 { color: var(--cinza-claro); font-family: 'Montserrat', sans-serif; margin-bottom: 10px; }
+        .contador { font-family: 'Montserrat', sans-serif; font-size: 2.5em; color: var(--azul-claro); margin-top: 10px; text-shadow: 0 0 5px var(--azul-claro); }
+        .progress-bar { width: 100%; background-color: var(--azul-escuro); border-radius: 5px; margin-top: 10px; height: 10px; }
+        .progress { height: 100%; background-color: var(--azul-claro); width: 0%; border-radius: 5px; transition: width 1s linear; }
+        .botao-missao.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; background-color: var(--cinza-principal); transform: none; }
+        .content-section { text-align: left; margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--fundo-card); line-height: 1.6; }
+        .content-section h2, .content-section h3 { color: var(--cinza-claro); font-family: 'Montserrat', sans-serif; margin-bottom: 10px; }
+        .content-section h3 { color: var(--azul-claro); margin-top: 20px; }
+        .content-section p, .content-section li { color: var(--cinza-principal); margin-bottom: 10px; }
+        .link-final {
+            display: none; /* Inicia escondido */
+            margin-top: 25px;
+            text-align: center;
+        }
+        .link-final a {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .link-final a:hover {
+            background-color: #c0392b;
+        }
+        @media (max-width: 600px) { .container { padding: 20px; } .logo { font-size: 2em; } .slogan { font-size: 1em; } }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <header>
+            <h1 class="logo">GGF</h1>
+            <p class="slogan">Área de Missões</p>
+        </header>
+
+        <div id="missao1" class="missao-item" style="display: block;">
+            <h2>Missão 1</h2>
+            <p>Acesse o link abaixo para prosseguir com a missão.</p>
+            <a href="https://youtube.com/@ggfteamoficial?si=Dw5AOIbscFa2fPXH" target="_blank" class="botao-missao link-missao" data-missao-id="1">Ir para o link da Missão 1</a>
+            <button id="checkMissao1" class="botao-missao disabled">Verificar e Continuar</button>
+        </div>
+        
+        <div id="missao2" class="missao-item">
+            <h2>Missão 2</h2>
+            <p>Acesse o link abaixo para prosseguir com a missão.</p>
+            <a href="https://youtu.be/BVfNbD6ZaMw?si=_ewEHdpXzU3cmRbp" target="_blank" class="botao-missao link-missao" data-missao-id="2">Ir para o link da Missão 2</a>
+            <button id="checkMissao2" class="botao-missao disabled">Verificar e Continuar</button>
+        </div>
+        
+        <div id="linkFinalSection" class="link-final">
+            <a href="https://alpharede.com/ym2KnXcp6wB" target="_blank">IR PARA O LINK FINAL</a>
+        </div>
+
+        <p id="mensagemStatus" class="message"></p>
+        <div id="progressBar" class="progress-bar" style="display:none;">
+            <div id="progress" class="progress"></div>
+        </div>
+        <p id="contadorTempo" class="contador"></p>
+        
+        <div class="content-section">
+            <h2>Suporte</h2>
+            <p>Se você tiver dúvidas ou precisar de ajuda com o site de Missões da GGF, consulte as informações a seguir:</p>
+            <ul>
+                <li><strong>Como progredir nas missões:</strong> Para avançar para a próxima missão, você deve primeiro clicar no link "Ir para o link da Missão [Número]". Isso abrirá uma nova aba. Ao retornar à página de missões, o botão "Verificar e Continuar" ficará ativo. Clique nele para iniciar o cronômetro e liberar a próxima missão.</li>
+                <li><strong>O que fazer se o botão "Verificar e Continuar" não funcionar:</strong> Certifique-se de que você clicou no link da missão primeiro. Se ainda assim não funcionar, tente recarregar a página. Seu progresso será resetado, mas você poderá tentar novamente.</li>
+                <li><strong>Contato:</strong> Se você ainda precisar de ajuda, entre em contato com nossa equipe de suporte.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const missoes = [
+                { id: 'missao1', checkBtnId: 'checkMissao1' },
+                { id: 'missao2', checkBtnId: 'checkMissao2' }
+            ];
+
+            const mensagemStatus = document.getElementById('mensagemStatus');
+            const contadorTempo = document.getElementById('contadorTempo');
+            const progressBar = document.getElementById('progressBar');
+            const progress = document.getElementById('progress');
+            const linkFinalSection = document.getElementById('linkFinalSection');
+
+            const tempoTotal = 10;
+            let timerInterval;
+
+            function iniciarTimer(missaoIndex) {
+                let tempoAtual = tempoTotal;
+                mensagemStatus.textContent = 'Aguarde, contando o tempo...';
+                progressBar.style.display = 'block';
+                
+                contadorTempo.textContent = tempoAtual;
+                progress.style.width = '100%';
+
+                timerInterval = setInterval(() => {
+                    tempoAtual--;
+                    contadorTempo.textContent = tempoAtual;
+                    progress.style.width = (tempoAtual / tempoTotal) * 100 + '%';
+
+                    if (tempoAtual <= 0) {
+                        clearInterval(timerInterval);
+                        mensagemStatus.textContent = '';
+                        contadorTempo.textContent = '';
+                        progressBar.style.display = 'none';
+                        liberarProximaMissao(missaoIndex);
+                    }
+                }, 1000);
+            }
+
+            function liberarProximaMissao(index) {
+                const checkBtnAnterior = document.getElementById(`checkMissao${index + 1}`);
+                
+                if (checkBtnAnterior) {
+                    checkBtnAnterior.classList.add('disabled');
+                    checkBtnAnterior.textContent = 'Missão Concluída';
+                    checkBtnAnterior.disabled = true;
+                }
+
+                if (index < missoes.length - 1) {
+                    const proximaMissaoId = missoes[index + 1].id;
+                    const proximaMissaoDiv = document.getElementById(proximaMissaoId);
+                    if (proximaMissaoDiv) {
+                        proximaMissaoDiv.style.display = 'block';
+                        alert(`Missão ${index + 1} concluída! A Missão ${index + 2} foi liberada.`);
+                    }
+                } else {
+                    // Após a última missão, exibe o link final
+                    alert('Parabéns! Você completou todas as missões!');
+                    const finalCheckBtn = document.getElementById(`checkMissao${index + 1}`);
+                    if (finalCheckBtn) {
+                        finalCheckBtn.style.display = 'none';
+                    }
+                    linkFinalSection.style.display = 'block'; // Exibe o botão do link final
+                }
+            }
+
+            document.querySelectorAll('.link-missao').forEach(link => {
+                link.addEventListener('click', function() {
+                    const missaoId = this.getAttribute('data-missao-id');
+                    const checkBtn = document.getElementById(`checkMissao${missaoId}`);
+                    if (checkBtn) {
+                        checkBtn.classList.remove('disabled');
+                        checkBtn.disabled = false;
+                    }
+                });
+            });
+
+            document.querySelectorAll('button[id^="checkMissao"]').forEach((checkBtn, index) => {
+                checkBtn.addEventListener('click', function() {
+                    clearInterval(timerInterval);
+                    iniciarTimer(index);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

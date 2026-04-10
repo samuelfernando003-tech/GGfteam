@@ -1,0 +1,87 @@
+{
+  "settings": {
+    "slogan": "Sua loja de confiança para o seu jogo favorito!",
+    "whatsapp_number": "558496833932",
+    "banner_image_url": "",
+    "color_primary": "#ff073a",
+    "color_secondary": "#f0f0f0",
+    "header_background_color": "#1a0000"
+  },
+  "products": [
+    {
+      "id": 1,
+      "titulo": "Passe Boyha para FF",
+      "descricao": "Desbloqueie recompensas exclusivas...",
+      "link": "passedeelite.html",
+      "imgSrc": "https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/copilot_image_1760094409837.jpeg",
+      "category": "Passe",
+      "price": "R$ 2,50"
+    },
+    {
+      "id": 2,
+      "titulo": "Passe Boyha (Reserva)",
+      "descricao": "Obtenha a reserva do seu passe boyha...",
+      "link": "reservapassedeelite.html",
+      "imgSrc": "https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/IMG_20251004_075124.jpg",
+      "category": "Passe",
+      "price": "R$ 4,99"
+    },
+    {
+      "id": 1760558254311,
+      "titulo": "GERADOR DE BIOS PARA FREE FIRE",
+      "descricao": "Gerador de Bio personalizadas",
+      "link": "gerador-bio.html",
+      "imgSrc": "https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/codigos-para-colocar-na-bio-e-no-perfil-do-free-fire-assinatura-e-letras-coloridas.jpg",
+      "category": "Perfil, gerador de bio",
+      "price": "0"
+    },
+    {
+      "id": 1765049025538,
+      "titulo": "SCRIPT RIO RISE",
+      "descricao": "AUTO FARME\nSPEED\nTP\n",
+      "link": "https://chat.whatsapp.com/JebZvdR7O2lL9hECquOfkL",
+      "imgSrc": "",
+      "category": "",
+      "price": "0"
+    },
+    {
+      "id": 1765630151388,
+      "titulo": "PACK DE SENSI FG",
+      "descricao": "Melhor esse que você sensibilidade no FF com o novo pack de sensi ",
+      "link": "https://wa.me/qr/YBPPGYCL3Q7AC1",
+      "imgSrc": "https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/IMG-20251213-WA0014.jpg",
+      "category": "FF",
+      "price": "5,99"
+    }
+  ],
+  "faq": [
+    {
+      "id": 1,
+      "question": "Como funciona a entrega dos produtos?",
+      "answer": "A entrega é feita em até 10 minutos após a confirmação do pagamento, geralmente via WhatsApp ou diretamente na sua conta do jogo, dependendo do produto."
+    },
+    {
+      "id": 2,
+      "question": "Quais são as formas de pagamento aceitas?",
+      "answer": "Aceitamos PIX, Cartão de Crédito (via plataformas seguras como Mercado Pago ou PagSeguro) e Boleto. O PIX é o método com confirmação mais rápida."
+    },
+    {
+      "id": 3,
+      "question": "O produto que comprei é seguro e original?",
+      "answer": "Sim! Todos os nossos produtos são adquiridos de fontes oficiais e garantimos 100% a segurança da sua conta. Não trabalhamos com métodos ilegais ou 'cheats'."
+    },
+    {
+      "id": 4,
+      "question": "Posso pedir reembolso se houver algum problema?",
+      "answer": "Oferecemos reembolso total caso o produto não seja entregue no prazo combinado ou se for comprovado algum defeito. Consulte nossa política de reembolso completa na página de Termos e Condições."
+    }
+  ],
+  "ads": [
+    {
+      "id": 1,
+      "title": "Super Oferta de Verão",
+      "imageUrl": "https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/IMG_20251004_075124.jpg",
+      "targetLink": "#lista-produtos-js"
+    }
+  ]
+}

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GGF Store - Painel Administrativo</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ggfcheats/Img.trabalhos.escilares/refs/heads/main/20250916_045921.png">
+    
+    <style>
+        /* Estilos Base e Variáveis */
+        :root {
+            --cor-destaque-primaria: #FF073A; /* Vermelho Neon */
+            --cor-texto-secundaria: #F0F0F0; /* Branco/Cinza Claro */
+            --cor-fundo-card: #1A0000; /* Fundo Escuro */
+            --cor-fundo-principal: #000000; /* Preto */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-fundo-principal);
+            color: var(--cor-texto-secundaria);
+            padding: 20px;
+        }
+
+        /* Títulos e Estrutura */
+        h1 {
+            color: var(--cor-destaque-primaria);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-header {
+            color: var(--cor-texto-secundaria);
+            border-bottom: 2px solid var(--cor-destaque-primaria);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        /* Container Principal do Painel */
+        #admin-panel {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--cor-fundo-card);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 7, 58, 0.5);
+        }
+
+        /* Formulários e Inputs */
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--cor-texto-secundaria);
+        }
+
+        input[type="text"], input[type="url"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: white;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Listas de Produtos/FAQ/Ads */
+        #products-list, #faq-list, #ads-list {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+        
+        .product-item, .faq-item, .ad-item {
+            background-color: #000;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid var(--cor-destaque-primaria);
+        }
+        
+        .product-actions, .faq-actions, .ad-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Botões */
+        button {
+            background-color: var(--cor-destaque-primaria);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #e00635;
+        }
+        
+        /* Botão Salvar JSON no final */
+        #btn-save-json {
+            margin-top: 40px;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            background-color: #008000;
+        }
+        
+        #btn-save-json:hover {
+             background-color: #006400;
+        }
+
+        /* Estilos dos Modais (Pop-up) */
+        .modal {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal > div {
+            background: var(--cor-fundo-card);
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid var(--cor-destaque-primaria);
+        }
+        
+        .modal button {
+            margin-top: 20px;
+            margin-right: 10px;
+        }
+        
+        /* Estilos para o input color */
+        .color-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .color-group input[type="color"] {
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="admin-panel">
+        <h1>Painel Administrativo - GGF Store</h1>
+        
+        <h2 class="section-header">Configurações Gerais</h2>
+        
+        <label for="edit-slogan">Slogan da Loja (Banner Principal):</label>
+        <input type="text" id="edit-slogan" placeholder="Ex: A loja de confiança para seu jogo favorito!">
+        
+        <label for="edit-whatsapp-number">Número de WhatsApp (apenas números, com DDD):</label>
+        <input type="number" id="edit-whatsapp-number" placeholder="Ex: 558496833932">
+        
+        <label for="edit-banner-img">URL da Imagem de Fundo do Banner (Opcional):</label>
+        <input type="url" id="edit-banner-img" placeholder="https://exemplo.com/imagem-fundo.jpg">
+
+        <div class="color-group">
+            <label>Cor de Destaque Primária (Botões, Títulos):</label>
+            <input type="color" id="edit-color-primary">
+        </div>
+        
+        <div class="color-group">
+            <label>Cor de Destaque Secundária (Textos, Detalhes):</label>
+            <input type="color" id="edit-color-secondary">
+        </div>
+        
+        <div class="color-group">
+            <label>Cor de Fundo do Header/Menu:</label>
+            <input type="color" id="edit-header-bg-color">
+        </div>
+        
+        <button onclick="updateCurrentDataFromInputs()">Atualizar Configurações</button>
+
+
+        <h2 class="section-header">Gerenciamento de Produtos</h2>
+        <div id="products-list">
+            </div>
+        <button onclick="openProductModal()">Adicionar Novo Produto</button>
+
+        <h2 class="section-header">Dúvidas Frequentes (FAQ)</h2>
+        <div id="faq-list">
+            </div>
+        <button onclick="openFaqModal()">Adicionar Nova Pergunta</button>
+        
+        <h2 class="section-header">Gerenciamento de Anúncios/Banners</h2>
+        <div id="ads-list">
+            </div>
+        <button onclick="openAdsModal()">Adicionar Novo Anúncio</button>
+        
+
+        <button id="btn-save-json" onclick="generateAndDownloadJSON()">
+            💾 SALVAR E GERAR data.json PARA DOWNLOAD
+        </button>
+
+    </div>
+    
+    
+    <div id="product-modal" class="modal">
+        <div>
+            <h3>Editar Produto</h3>
+            <input type="hidden" id="modal-product-id">
+
+            <label>Título:</label><input type="text" id="modal-product-titulo">
+            <label>Descrição:</label><textarea id="modal-product-descricao"></textarea>
+            
+            <label>Link de Destino (Ex: passedeelite.html):</label><input type="text" id="modal-product-link">
+            <label>URL da Imagem:</label><input type="url" id="modal-product-imgSrc">
+            
+            <label>Categoria (Ex: Passe, Moedas, Skin):</label><input type="text" id="modal-product-category">
+            <label>Preço (Ex: R$ 49,90):</label><input type="text" id="modal-product-price">
+
+            <button onclick="saveProduct()">Salvar Produto</button>
+            <button onclick="document.getElementById('product-modal').style.display='none'" style="background-color: #555;">Cancelar</button>
+        </div>
+    </div>
+    
+    <div id="faq-modal" class="modal">
+        <div>
+            <h3>Editar Pergunta Frequente</h3>
+            <input type="hidden" id="modal-faq-id">
+
+            <label>Pergunta:</label><input type="text" id="modal-faq-question">
+            <label>Resposta:</label><textarea id="modal-faq-answer"></textarea>
+
+            <button onclick="saveFaq()">Salvar FAQ</button>
+            <button onclick="document.getElementById('faq-modal').style.display='none'" style="background-color: #555;">Cancelar</button>
+        </div>
+    </div>
+    
+    <div id="ads-modal" class="modal">
+        <div>
+            <h3>Editar Anúncio/Banner</h3>
+            <input type="hidden" id="modal-ad-id">
+
+            <label>Título/Nome Interno:</label><input type="text" id="modal-ad-title">
+            <label>URL da Imagem do Banner:</label><input type="url" id="modal-ad-imageUrl">
+            <label>Link de Destino (URL de clique):</label><input type="text" id="modal-ad-targetLink">
+
+            <button onclick="saveAd()">Salvar Anúncio</button>
+            <button onclick="document.getElementById('ads-modal').style.display='none'" style="background-color: #555;">Cancelar</button>
+        </div>
+    </div>
+
+
+    <script>
+        let currentData = {
+            settings: {},
+            products: [],
+            faq: [],
+            ads: [] // Novo array inicializado
+        };
+
+        // ========================================
+        // 1. FUNÇÕES GERAIS E CARREGAMENTO
+        // ========================================
+
+        async function fetchLojaData() {
+            try {
+                // Adiciona timestamp para evitar cache e garantir o carregamento do JSON mais recente
+                const response = await fetch('data.json?t=' + new Date().getTime());
+                if (!response.ok) {
+                    throw new Error('Falha ao carregar data.json');
+                }
+                return await response.json();
+            } catch (error) {
+                console.warn("Erro no carregamento do data.json. Usando dados padrão vazios.", error);
+                // Retorna a estrutura mínima para evitar erros
+                return { 
+                    settings: { 
+                        slogan: 'Painel Admin', color_primary: '#FF073A', color_secondary: '#F0F0F0', whatsapp_number: '', header_background_color: '#1A0000', banner_image_url: '' 
+                    },
+                    products: [], 
+                    faq: [],
+                    ads: []
+                };
+            }
+        }
+        
+        async function loadAdminPanel() {
+            const initialData = await fetchLojaData();
+            currentData = initialData;
+            
+            // Garante que todos os arrays existem
+            if (!currentData.products) currentData.products = [];
+            if (!currentData.faq) currentData.faq = [];
+            if (!currentData.ads) currentData.ads = [];
+
+            // 1. Carregar Configurações
+            const s = currentData.settings;
+            document.getElementById('edit-slogan').value = s.slogan || '';
+            document.getElementById('edit-whatsapp-number').value = s.whatsapp_number || '';
+            document.getElementById('edit-banner-img').value = s.banner_image_url || '';
+            document.getElementById('edit-color-primary').value = s.color_primary || '#FF073A';
+            document.getElementById('edit-color-secondary').value = s.color_secondary || '#F0F0F0';
+            document.getElementById('edit-header-bg-color').value = s.header_background_color || '#1A0000';
+
+            // 2. Renderizar Listas
+            renderProductsList();
+            renderFaqList();
+            renderAdsList(); // NOVO
+        }
+        
+        function updateCurrentDataFromInputs() {
+            // Salva as configurações de volta para o objeto currentData
+            currentData.settings = {
+                slogan: document.getElementById('edit-slogan').value,
+                whatsapp_number: document.getElementById('edit-whatsapp-number').value,
+                banner_image_url: document.getElementById('edit-banner-img').value,
+                color_primary: document.getElementById('edit-color-primary').value,
+                color_secondary: document.getElementById('edit-color-secondary').value,
+                header_background_color: document.getElementById('edit-header-bg-color').value
+            };
+            alert('Configurações salvas temporariamente! Clique em "SALVAR E GERAR data.json" para finalizar.');
+        }
+
+        // ========================================
+        // 2. LÓGICA DE PRODUTOS
+        // ========================================
+        
+        function renderProductsList() {
+            const listDiv = document.getElementById('products-list');
+            listDiv.innerHTML = '';
+
+            currentData.products.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'product-item';
+                item.innerHTML = `
+                    <div style="flex-grow: 1;">
+                        <strong>${product.titulo}</strong> 
+                        <span style="color: #00ff00; margin-left: 10px;">(${product.category || 'N/A'}) - ${product.price || 'N/A'}</span>
+                    </div>
+                    <div class="product-actions">
+                        <button onclick="editProduct(${product.id})">Editar</button>
+                        <button onclick="deleteProduct(${product.id})" style="background-color: #a00;">Excluir</button>
+                    </div>
+                `;
+                listDiv.appendChild(item);
+            });
+        }
+        
+        function openProductModal(product = {}) {
+            // Se for novo, gera um ID negativo temporário para diferenciação
+            document.getElementById('modal-product-id').value = product.id || -(currentData.products.length + 1); 
+            document.getElementById('modal-product-titulo').value = product.titulo || '';
+            document.getElementById('modal-product-descricao').value = product.descricao || '';
+            document.getElementById('modal-product-link').value = product.link || '';
+            document.getElementById('modal-product-imgSrc').value = product.imgSrc || '';
+            document.getElementById('modal-product-category').value = product.category || ''; // NOVO
+            document.getElementById('modal-product-price').value = product.price || ''; // NOVO
+            
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+
+        function saveProduct() {
+            const id = parseInt(document.getElementById('modal-product-id').value);
+            const titulo = document.getElementById('modal-product-titulo').value;
+            const descricao = document.getElementById('modal-product-descricao').value;
+            const link = document.getElementById('modal-product-link').value;
+            const imgSrc = document.getElementById('modal-product-imgSrc').value;
+            const category = document.getElementById('modal-product-category').value; // NOVO
+            const price = document.getElementById('modal-product-price').value; // NOVO
+
+            if (!titulo || !link) {
+                alert('Título e Link são obrigatórios!');
+                return;
+            }
+            
+            // Usa o ID existente (se for edição) ou gera um novo ID negativo (se for adição)
+            const newProduct = { 
+                id: id,
+                titulo, 
+                descricao, 
+                link, 
+                imgSrc,
+                category,
+                price
+            };
+
+            const index = currentData.products.findIndex(p => p.id === id);
+
+            if (index !== -1) {
+                // Editar existente
+                currentData.products[index] = newProduct;
+            } else {
+                // Adicionar novo (push no array)
+                // Usamos Date.now() para garantir um ID único para o novo item temporário, se o ID for negativo
+                newProduct.id = -(Date.now()); 
+                currentData.products.push(newProduct);
+            }
+            
+            document.getElementById('product-modal').style.display = 'none';
+            renderProductsList();
+            alert('Produto salvo temporariamente! Não se esqueça de clicar no botão "SALVAR E GERAR data.json" no final.');
+        }
+        
+        function editProduct(id) {
+            const product = currentData.products.find(p => p.id === id);
+            if (product) openProductModal(product);
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Tem certeza que deseja excluir este produto?')) {
+                currentData.products = currentData.products.filter(p => p.id !== id);
+                renderProductsList();
+                alert('Produto excluído temporariamente! Clique em "SALVAR E GERAR data.json" para aplicar.');
+            }
+        }
+
+        // ========================================
+        // 3. LÓGICA DE FAQ
+        // ========================================
+        
+        function renderFaqList() {
+            const listDiv = document.getElementById('faq-list');
+            listDiv.innerHTML = '';
+
+            currentData.faq.forEach(faqItem => {
+                const item = document.createElement('div');
+                item.className = 'faq-item';
+                item.innerHTML = `
+                    <div style="flex-grow: 1;">
+                        <strong>P: ${faqItem.question}</strong>
+                        <p style="color: #ccc; font-size: 0.9em; margin-top: 5px;">R: ${faqItem.answer.substring(0, 50)}...</p>
+                    </div>
+                    <div class="faq-actions">
+                        <button onclick="editFaq(${faqItem.id})">Editar</button>
+                        <button onclick="deleteFaq(${faqItem.id})" style="background-color: #a00;">Excluir</button>
+                    </div>
+                `;
+                listDiv.appendChild(item);
+            });
+        }
+        
+        function openFaqModal(faqItem = {}) {
+            document.getElementById('modal-faq-id').value = faqItem.id || -(currentData.faq.length + 1);
+            document.getElementById('modal-faq-question').value = faqItem.question || '';
+            document.getElementById('modal-faq-answer').value = faqItem.answer || '';
+            
+            document.getElementById('faq-modal').style.display = 'flex';
+        }
+
+        function saveFaq() {
+            const id = parseInt(document.getElementById('modal-faq-id').value);
+            const question = document.getElementById('modal-faq-question').value;
+            const answer = document.getElementById('modal-faq-answer').value;
+
+            if (!question || !answer) {
+                alert('Pergunta e Resposta são obrigatórios!');
+                return;
+            }
+
+            const newFaq = { id: id, question, answer };
+
+            const index = currentData.faq.findIndex(f => f.id === id);
+
+            if (index !== -1) {
+                currentData.faq[index] = newFaq;
+            } else {
+                newFaq.id = -(Date.now());
+                currentData.faq.push(newFaq);
+            }
+            
+            document.getElementById('faq-modal').style.display = 'none';
+            renderFaqList();
+            alert('FAQ salvo temporariamente!');
+        }
+        
+        function editFaq(id) {
+            const faqItem = currentData.faq.find(f => f.id === id);
+            if (faqItem) openFaqModal(faqItem);
+        }
+
+        function deleteFaq(id) {
+            if (confirm('Tem certeza que deseja excluir esta pergunta?')) {
+                currentData.faq = currentData.faq.filter(f => f.id !== id);
+                renderFaqList();
+                alert('FAQ excluído temporariamente!');
+            }
+        }
+        
+        // ========================================
+        // 4. LÓGICA DE ANÚNCIOS (ADS) - NOVO
+        // ========================================
+
+        function renderAdsList() {
+            const listDiv = document.getElementById('ads-list');
+            listDiv.innerHTML = '';
+            
+            currentData.ads.forEach(adItem => {
+                const item = document.createElement('div');
+                item.className = 'ad-item';
+                item.innerHTML = `
+                    <div style="flex-grow: 1;">
+                        <strong>Banner: ${adItem.title}</strong> 
+                        <p style="color: #ccc; font-size: 0.9em; margin-top: 5px;">Link: ${adItem.targetLink}</p>
+                    </div>
+                    <div class="ad-actions">
+                        <button onclick="editAd(${adItem.id})">Editar</button>
+                        <button onclick="deleteAd(${adItem.id})" style="background-color: #a00;">Excluir</button>
+                    </div>
+                `;
+                listDiv.appendChild(item);
+            });
+        }
+        
+        function openAdsModal(adItem = {}) {
+            document.getElementById('modal-ad-id').value = adItem.id || -(currentData.ads.length + 1); 
+            document.getElementById('modal-ad-title').value = adItem.title || '';
+            document.getElementById('modal-ad-imageUrl').value = adItem.imageUrl || '';
+            document.getElementById('modal-ad-targetLink').value = adItem.targetLink || '';
+            
+            document.getElementById('ads-modal').style.display = 'flex';
+        }
+
+        function saveAd() {
+            const id = parseInt(document.getElementById('modal-ad-id').value);
+            const title = document.getElementById('modal-ad-title').value;
+            const imageUrl = document.getElementById('modal-ad-imageUrl').value;
+            const targetLink = document.getElementById('modal-ad-targetLink').value;
+            
+            if (!title || !imageUrl) {
+                alert('Título e URL da Imagem são obrigatórios!');
+                return;
+            }
+            
+            const newAd = { 
+                id: id,
+                title, 
+                imageUrl, 
+                targetLink 
+            };
+
+            const index = currentData.ads.findIndex(a => a.id === id);
+
+            if (index !== -1) {
+                // Editar existente
+                currentData.ads[index] = newAd;
+            } else {
+                // Adicionar novo
+                newAd.id = -(Date.now());
+                currentData.ads.push(newAd);
+            }
+            
+            document.getElementById('ads-modal').style.display = 'none';
+            renderAdsList();
+            alert('Anúncio salvo temporariamente!');
+        }
+
+        function editAd(id) {
+            const adItem = currentData.ads.find(a => a.id === id);
+            if (adItem) openAdsModal(adItem);
+        }
+
+        function deleteAd(id) {
+            if (confirm('Tem certeza que deseja excluir este anúncio/banner?')) {
+                currentData.ads = currentData.ads.filter(a => a.id !== id);
+                renderAdsList();
+                alert('Anúncio excluído temporariamente!');
+            }
+        }
+        
+        // ========================================
+        // 5. GERAÇÃO E DOWNLOAD DO JSON
+        // ========================================
+
+        function generateAndDownloadJSON() {
+            
+            // 1. Atualizar Configurações antes de gerar o JSON
+            updateCurrentDataFromInputs();
+            
+            // 2. Normalizar IDs temporários (negativos) para IDs positivos sequenciais (ou absolutos)
+            
+            // a) Produtos
+            currentData.products = currentData.products.map((p, index) => ({ 
+                ...p, 
+                // Se o ID for negativo, usa o índice+1 como novo ID positivo (ou usa Math.abs se quiser manter o "número" mas positivo)
+                id: Math.abs(p.id) < 0 ? index + 1 : Math.abs(p.id) 
+            }));
+            
+            // b) FAQ
+            currentData.faq = currentData.faq.map((f, index) => ({ 
+                ...f, 
+                id: Math.abs(f.id) < 0 ? index + 1 : Math.abs(f.id) 
+            }));
+            
+            // c) Ads (Anúncios)
+            currentData.ads = currentData.ads.map((a, index) => ({ 
+                ...a, 
+                id: Math.abs(a.id) < 0 ? index + 1 : Math.abs(a.id) 
+            }));
+
+
+            // 3. Gerar o JSON
+            const jsonString = JSON.stringify(currentData, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            // 4. Criar e clicar no link de download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('Arquivo data.json gerado e baixado com sucesso!');
+        }
+
+        // Inicia o painel ao carregar a página
+        document.addEventListener('DOMContentLoaded', loadAdminPanel);
+    </script>
+</body>
+</html>

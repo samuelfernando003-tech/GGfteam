@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteúdo Indisponível</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-escuro: #0a192f;
+            --azul-claro: #64ffda;
+            --cinza-principal: #8892b0;
+            --cinza-claro: #ccd6f6;
+            --fundo-card: #112240;
+            --sombra-card: rgba(0, 0, 0, 0.3);
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--cinza-claro);
+            background-color: var(--azul-escuro);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+        }
+        .content-container {
+            max-width: 600px;
+            padding: 40px;
+            background-color: rgba(17, 34, 64, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--sombra-card);
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--azul-claro);
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: var(--cinza-principal);
+            margin-bottom: 30px;
+        }
+        a.back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--azul-claro);
+            color: var(--azul-escuro);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        a.back-button:hover {
+            background-color: #55e6c1;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <h1>Conteúdo Indisponível</h1>
+        <p>Ainda não há trabalhos disponíveis para a seleção feita. Por favor, volte mais tarde ou selecione outra opção.</p>
+        <a href="index.html" class="back-button">Voltar para a Página Inicial</a>
+    </div>
+</body>
+</html>

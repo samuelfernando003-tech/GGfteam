@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@H5X_TEAM | Guilda de Free Fire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Integrado para Estilo Profissional */
+        :root {
+            --cor-principal: #FF5733; /* Vermelho/Laranja de destaque */
+            --cor-secundaria: #333333;
+            --cor-fundo: #1c1c1c; /* Fundo escuro para um visual gamer/profissional */
+            --cor-texto: #f0f0f0;
+            --cor-barra: #222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+        }
+
+        /* Barra Fixa Superior */
+        .header-fixo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: var(--cor-barra);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 3px solid var(--cor-principal);
+        }
+
+        .header-fixo h1 {
+            color: var(--cor-principal);
+            font-size: 1.8em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Menu Lateral Esquerdo */
+        .sidebar {
+            position: fixed;
+            top: 60px; /* Abaixo da barra fixa */
+            left: 0;
+            width: 250px;
+            height: calc(100% - 60px);
+            background-color: var(--cor-secundaria);
+            padding-top: 20px;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 900;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--cor-texto);
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: background-color 0.3s, color 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #444;
+            color: var(--cor-principal);
+            border-left: 3px solid var(--cor-principal);
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            margin-left: 250px; /* Espaço para a sidebar */
+            padding: 80px 30px 30px 30px; /* Padding superior para não cobrir pela barra fixa */
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: var(--cor-barra);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .section h2 {
+            color: var(--cor-principal);
+            border-bottom: 2px solid var(--cor-principal);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        /* Estilos do FAQ (Accordion) */
+        .faq-item {
+            margin-bottom: 10px;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+
+        .faq-pergunta {
+            background-color: #3a3a3a;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .faq-pergunta:hover {
+            background-color: #4a4a4a;
+        }
+
+        .faq-resposta {
+            padding: 15px;
+            background-color: #2a2a2a;
+            display: none; /* Escondida por padrão */
+            overflow: hidden;
+            border-top: 1px solid #444;
+        }
+
+        .icon-plus {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .icon-plus {
+            transform: rotate(45deg);
+        }
+
+        /* Estilos do Recrutamento */
+        .recrutamento-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .recrutamento-form label {
+            font-weight: 600;
+            margin-top: 5px;
+            color: var(--cor-principal);
+        }
+
+        .recrutamento-form input[type="text"],
+        .recrutamento-form input[type="number"],
+        .recrutamento-form textarea {
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #3a3a3a;
+            color: var(--cor-texto);
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+
+        .recrutamento-form input:focus,
+        .recrutamento-form textarea:focus {
+            border-color: var(--cor-principal);
+            outline: none;
+        }
+
+        .recrutamento-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .recrutamento-form button {
+            background-color: var(--cor-principal);
+            color: var(--cor-barra);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .recrutamento-form button:hover {
+            background-color: #ff7853;
+            transform: translateY(-1px);
+        }
+
+        .recrutamento-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #333;
+            border-radius: 4px;
+            border-left: 5px solid var(--cor-principal);
+        }
+
+        .recrutamento-info a {
+            color: var(--cor-principal);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .recrutamento-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Rodapé Simples */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+
+        /* Responsividade básica para telas menores */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                padding-top: 0;
+                box-shadow: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding-top: 20px;
+            }
+            
+            .header-fixo {
+                position: relative;
+                height: auto;
+                padding: 10px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-fixo h1 {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-fixo">
+        <h1>@H5X_TEAM</h1>
+    </header>
+
+    <nav class="sidebar">
+        <ul>
+            <li><a href="#historia" class="menu-item active">📜 História</a></li>
+            <li><a href="#faq" class="menu-item">❓ FAQ</a></li>
+            <li><a href="#recrutamento" class="menu-item">🎯 Recrutamento</a></li>
+            <li><a href="https://ffshare.garena.com/?region=BR&lang=pt-br&action=locate_clan&clan_id=2042136226&version=OB51" target="_blank">🔗 Perfil Oficial FF</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+
+        <section id="historia" class="section">
+            <h2>📜 Nossa História</h2>
+            <p>A **@H5X\_TEAM** nasceu de uma visão de união e competitividade no cenário do Free Fire. Fundada em [Ano de Fundação], por [Nome dos Fundadores/Líderes], nossa guilda rapidamente se destacou não apenas pela habilidade em campo, mas pela forte comunidade que construímos.</p>
+
+            <p>Desde o início, nosso foco tem sido o desenvolvimento de cada membro, promovendo treinos diários, campeonatos internos e a participação em ligas competitivas. Mais do que um clã, somos uma família que busca o Top Global e a evolução constante.</p>
+
+            <h3>Nossos Pilares</h3>
+            <ul>
+                <li><strong>União:</strong> Respeito e colaboração acima de tudo.</li>
+                <li><strong>Disciplina:</strong> Compromisso com os treinos e regras.</li>
+                <li><strong>Competitividade:</strong> Foco em alcançar o mestre/desafiante em todas as temporadas.</li>
+            </ul>
+        </section>
+
+        <section id="faq" class="section">
+            <h2>❓ FAQ - Perguntas Frequentes</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-pergunta">
+                        Quais são os principais requisitos para entrar na guilda?
+                        <span class="icon-plus">+</span>
+                    </div>
+                    <div class="faq-resposta">
+                        <p>Os requisitos básicos incluem: Nível mínimo [X], Taxa KD/HS mínima de [Y]%, ter Discord/WhatsApp, e estar ativo em pelo menos 4 dias por semana. Os requisitos exatos podem ser verificados no formulário de recrutamento.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-pergunta">
+                        A guilda foca em ranqueada ou competitivo (campeonatos)?
+                        <span class="icon-plus">+</span>
+                    </div>
+                    <div class="faq-resposta">
+                        <p>Focamos em ambos. Nossa meta é ter todos os membros no Mestre/Desafiante e também montamos lines para campeonatos e Ligas externas, buscando sempre o cenário profissional.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-pergunta">
+                        Como faço para subir de patente dentro da guilda?
+                        <span class="icon-plus">+</span>
+                    </div>
+                    <div class="faq-resposta">
+                        <p>A promoção é baseada em desempenho nos treinos, pontuação de honra (dog tags), atividade e, principalmente, em sua postura dentro e fora do jogo. Membros que ajudam no recrutamento e organização são valorizados.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="recrutamento" class="section">
+            <h2>🎯 Sistema de Recrutamento</h2>
+            <p>Se você tem o que é preciso para fazer parte da **@H5X\_TEAM**, preencha o formulário abaixo. Sua aplicação será analisada por nossos líderes.</p>
+
+            <form class="recrutamento-form" id="form-recrutamento">
+                <label for="nome-nick">Nome e Nick no Jogo:</label>
+                <input type="text" id="nome-nick" name="nome-nick" required placeholder="Seu nome | H5X_SeuNick">
+
+                <label for="id-ff">ID do Free Fire:</label>
+                <input type="number" id="id-ff" name="id-ff" required placeholder="Ex: 1234567890">
+
+                <label for="nivel">Nível Atual (no jogo):</label>
+                <input type="number" id="nivel" name="nivel" required placeholder="Ex: 70">
+
+                <label for="patente">Patente Atual:</label>
+                <input type="text" id="patente" name="patente" required placeholder="Ex: Mestre / Desafiante">
+                
+                <label for="kd-hs">KD e Taxa HS (Geral):</label>
+                <input type="text" id="kd-hs" name="kd-hs" required placeholder="Ex: KD 3.5 / HS 40%">
+
+                <label for="porque">Por que você quer entrar na @H5X_TEAM?</label>
+                <textarea id="porque" name="porque" required placeholder="Conte-nos sua experiência e seus objetivos."></textarea>
+                
+                <label for="contato-zap">Seu WhatsApp (apenas o DDD + Número):</label>
+                <input type="text" id="contato-zap" name="contato-zap" required value="84996833932" placeholder="Ex: 84996833932">
+
+                <button type="submit">Enviar Candidatura</button>
+            </form>
+
+            <div class="recrutamento-info">
+                <p>Se preferir, entre em contato diretamente com o líder no WhatsApp para tirar dúvidas:</p>
+                <p>📞 <a id="whatsapp-link" href="https://wa.me/5584996833932" target="_blank">Falar com o Líder no WhatsApp (84 99683-3932)</a></p>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="footer">
+        © 2025 @H5X_TEAM - Todos os direitos reservados.
+    </footer>
+
+    <script>
+        // JS para o FAQ (sistema de abrir/fechar - Accordion)
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const pergunta = item.querySelector('.faq-pergunta');
+            pergunta.addEventListener('click', () => {
+                // Fecha todos os outros itens
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-resposta').style.display = 'none';
+                    }
+                });
+
+                // Alterna o estado do item clicado
+                item.classList.toggle('active');
+                const resposta = item.querySelector('.faq-resposta');
+                if (item.classList.contains('active')) {
+                    resposta.style.display = 'block';
+                } else {
+                    resposta.style.display = 'none';
+                }
+            });
+        });
+
+        // JS para o Recrutamento (gera link do WhatsApp com os dados)
+        document.getElementById('form-recrutamento').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const nomeNick = document.getElementById('nome-nick').value;
+            const idFF = document.getElementById('id-ff').value;
+            const nivel = document.getElementById('nivel').value;
+            const patente = document.getElementById('patente').value;
+            const kdHs = document.getElementById('kd-hs').value;
+            const porque = document.getElementById('porque').value;
+            const contatoZap = document.getElementById('contato-zap').value;
+            
+            // Texto da mensagem pré-preenchida para o WhatsApp
+            const mensagem = 
+                `🔥 Nova Candidatura - @H5X_TEAM 🔥%0A%0A` +
+                `*Nome/Nick:* ${nomeNick}%0A` +
+                `*ID FF:* ${idFF}%0A` +
+                `*Nível:* ${nivel}%0A` +
+                `*Patente:* ${patente}%0A` +
+                `*KD/HS:* ${kdHs}%0A%0A` +
+                `*Motivação:* ${porque}%0A%0A` +
+                `Por favor, me adicione para um teste.`;
+
+            // Abre o link do WhatsApp com a mensagem pré-preenchida (para o SEU número: 84996833932)
+            const whatsappURL = `https://wa.me/55${contatoZap}?text=${mensagem}`;
+            
+            window.open(whatsappURL, '_blank');
+
+            // Opcional: Limpar o formulário após o envio
+            // this.reset();
+            alert("Sua candidatura foi enviada para o WhatsApp do Líder. Prossiga na janela que abriu!");
+        });
+
+        // JS para navegação e destaque do menu
+        document.querySelectorAll('.menu-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Remove a classe 'active' de todos
+                document.querySelectorAll('.menu-item').forEach(l => l.classList.remove('active'));
+                // Adiciona a classe 'active' ao clicado
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passe de Boyha - GGF Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-escuro: #0a192f;
+            --azul-claro: #64ffda;
+            --cinza-principal: #8892b0;
+            --cinza-claro: #ccd6f6;
+            --fundo-card: #112240;
+            --sombra-card: rgba(0, 0, 0, 0.3);
+            --vermelho-destaque: #ff4d4d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--cinza-principal);
+            background-color: var(--azul-escuro);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: var(--fundo-card);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--sombra-card);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--fundo-card);
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--azul-claro);
+            font-size: 3.5em;
+            font-weight: 700;
+            text-shadow: 0 0 5px var(--azul-claro);
+            animation: pulse-logo 2s infinite alternate;
+        }
+
+        @keyframes pulse-logo {
+            from { text-shadow: 0 0 5px var(--azul-claro); }
+            to { text-shadow: 0 0 15px var(--azul-claro), 0 0 25px var(--azul-claro); }
+        }
+
+        .slogan {
+            font-size: 1.1em;
+            margin-top: 10px;
+            color: var(--cinza-claro);
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        section h2, section h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--cinza-claro);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .produto-detalhe {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .produto-detalhe img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid var(--azul-claro);
+        }
+
+        .produto-detalhe p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 700px;
+        }
+
+        .produto-detalhe ul {
+            list-style-type: none;
+            text-align: left;
+            max-width: 500px;
+            margin: 20px 0;
+        }
+
+        .produto-detalhe li {
+            background-color: var(--azul-escuro);
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .produto-detalhe li::before {
+            content: '✔';
+            color: var(--azul-claro);
+            font-weight: bold;
+        }
+
+        .botao-compra {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--azul-claro);
+            color: var(--azul-escuro);
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            cursor: pointer; /* Adiciona o cursor de 'mão' */
+        }
+
+        .botao-compra:hover {
+            transform: translateY(-3px);
+            background-color: #55f3bf;
+        }
+
+        .voltar-link {
+            margin-top: 20px;
+            display: block;
+            color: var(--cinza-claro);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .voltar-link:hover {
+            color: var(--azul-claro);
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--fundo-card);
+            margin-top: 40px;
+            color: var(--cinza-principal);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .logo {
+                font-size: 2.5em;
+            }
+        }
+
+        /* Novo CSS para o modal/diálogo de confirmação */
+        .modal-compra {
+            display: none; /* Inicia oculto */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeInModal 0.3s ease;
+        }
+
+        .modal-compra.show {
+            display: flex;
+        }
+
+        .modal-conteudo {
+            background-color: var(--fundo-card);
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 5px 20px var(--sombra-card);
+            transform: scale(0.9);
+            animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .modal-conteudo h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--azul-claro);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .modal-conteudo p {
+            font-size: 1em;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .modal-conteudo p strong {
+            color: var(--azul-claro);
+        }
+
+        .botoes-modal {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .botao-modal {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .botao-modal.confirmar {
+            background-color: var(--azul-claro);
+            color: var(--azul-escuro);
+        }
+
+        .botao-modal.cancelar {
+            background-color: var(--cinza-principal);
+            color: var(--fundo-card);
+        }
+
+        .botao-modal:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); }
+            to { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="voltar-link">← Voltar para a página inicial</a>
+            <h1 class="logo">Passe de Elite</h1>
+            <p class="slogan">Desbloqueie recompensas exclusivas e suba de nível!</p>
+        </header>
+
+        <section class="bem-vindo">
+            <h2>O que você ganha com o Passe de Elite?</h2>
+            <div class="produto-detalhe">
+                <img src="https://raw.githubusercontent.com/ggfcheats/Img-ggf-ff/refs/heads/main/IMG_20251004_075124.jpg" alt="Imagem do Passe de Elite">
+                <p>O Passe de Elite é a melhor forma de maximizar sua experiência no jogo. Com ele, você tem acesso a skins, personagens, armas exclusivas e muito mais.</p>
+                <h3>Vantagens</h3>
+                <ul>
+                    <li>Acesso a missões especiais para acelerar seu progresso.</li>
+                    <li>Skins de personagens e armas lendárias.</li>
+                    <li>Emotes e itens cosméticos raros.</li>
+                    <li>Vantagens exclusivas e recompensas diárias.</li>
+                </ul>
+                <a class="botao-compra" onclick="abrirDialogoCompra()">Comprar agora</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 GGF Store. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+    
+    <div class="modal-compra" id="modalCompra">
+        <div class="modal-conteudo">
+            <h3>Confirmação de Compra</h3>
+            <p>Você está prestes a comprar o <strong>Passe de Elite</strong> pelo valor de <strong>R$ 4,99</strong>. Ao confirmar, você será redirecionado para o WhatsApp para finalizar a compra da sua reserva do seu passe de setembro com o <strong>DEV GENIVAL TEAM</strong>.</p>
+            <div class="botoes-modal">
+                <button class="botao-modal cancelar" onclick="fecharDialogoCompra()">Cancelar</button>
+                <button class="botao-modal confirmar" onclick="redirecionarWhatsApp()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function abrirDialogoCompra() {
+            const modal = document.getElementById('modalCompra');
+            modal.classList.add('show');
+        }
+
+        function fecharDialogoCompra() {
+            const modal = document.getElementById('modalCompra');
+            modal.classList.remove('show');
+        }
+
+        function redirecionarWhatsApp() {
+            const numeroWhatsApp = '558496833932';
+            const produto = 'Passe de Elite Reserva de setembro';
+            const valor = '4,99';
+            
+            // Mensagem pré-definida codificada para URL
+            const mensagem = encodeURIComponent(`Olá, quero comprar o ${produto} no valor de R$ ${valor}.`);
+            
+            // Link para o WhatsApp
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
+            
+            // Abre o link em uma nova aba
+            window.open(urlWhatsApp, '_blank');
+
+            // Fecha o diálogo após o redirecionamento
+            fecharDialogoCompra();
+        }
+    </script>
+</body>
+</html>
